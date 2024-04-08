@@ -15,6 +15,18 @@ class Api::V1::FeaturesController < ApplicationController
   end
 
   def show
+    earthquake = Earthquake.find_by(id: params[:id])
+    if earthquake
+
+      earthquake = serialize_feature(earthquake)
+      render json:{
+        data: earthquake
+      } 
+    else
+      render json: {
+        error: "Earthquake not found"
+      }, status: :not_found
+    end
   end
 
   def create
@@ -35,12 +47,12 @@ class Api::V1::FeaturesController < ApplicationController
         mag_type: feature.mag_type,
         title: feature.title,
         coordinates: {
-           longitude: feature.longitude,
-           latitude: feature.latitude
+          longitude: feature.longitude,
+          latitude: feature.latitude
         }
       },
-      "links":{
-        "external_url": feature.url
+      links: {
+        external_url: feature.url
       }
     }
   end
@@ -54,6 +66,4 @@ class Api::V1::FeaturesController < ApplicationController
   def paginate(features)
     features.paginate(page: params[:page], per_page: params[:per_page] || 10)
   end
-
 end
-
