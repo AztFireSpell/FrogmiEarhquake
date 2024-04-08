@@ -132,6 +132,10 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.3-x86_64-linux)
       racc (~> 1.4)
+    open-uri (0.4.1)
+      stringio
+      time
+      uri
     psych (5.1.2)
       stringio
     puma (6.4.2)
@@ -187,13 +191,17 @@ GEM
     sqlite3 (1.7.3-x86_64-linux)
     stringio (3.1.0)
     thor (1.3.1)
+    time (0.3.0)
+      date
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.13.0)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (4.0.0)
     zeitwerk (2.6.13)
 
 PLATFORMS
@@ -207,10 +215,12 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  open-uri
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.2)
   sqlite3 (~> 1.4)
   tzinfo-data
+  will_paginate
 
 RUBY VERSION
    ruby 3.0.6p216
