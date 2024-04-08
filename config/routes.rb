@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :features, only: [:index, :show, :create]
+      resources :features, only: [:index, :show, :create] do
+        resources :comments, only: [:index,:create]
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
