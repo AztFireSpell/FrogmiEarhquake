@@ -21,7 +21,7 @@ def persist_feature(feature)
 
   return unless valid_feature?(properties, coordinates)
 
-  Feature.find_or_create_by(usgs_id: feature['id']) do |f|
+  Earthquake.find_or_create_by(usgs_id: feature['id']) do |f|
     f.magnitude = properties['mag']
     f.place = properties['place']
     f.time = Time.at(properties['time'] / 1000) # Convertir a formato de tiempo UNIX
