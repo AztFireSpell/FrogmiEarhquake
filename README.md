@@ -25,6 +25,12 @@ Entrar a la carpeta del proyecto
   cd my-project
 ```
 
+Instalar las gemas requeridas
+
+```bash
+  bundle install
+```
+
 Crear la base de datos local mysqlite con las migraciones
 
 ```bash

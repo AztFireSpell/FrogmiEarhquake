@@ -34,20 +34,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_08_222523) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "features", force: :cascade do |t|
-    t.string "usgs_id"
-    t.decimal "magnitude"
-    t.string "place"
-    t.datetime "time"
-    t.string "url"
-    t.boolean "tsunami"
-    t.string "mag_type"
-    t.string "title"
-    t.decimal "longitude"
-    t.decimal "latitude"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "comments", "earthquakes"
 end
