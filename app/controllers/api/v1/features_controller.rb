@@ -59,7 +59,7 @@ class Api::V1::FeaturesController < ApplicationController
 
   def filter_by_mag_type(features)
     return features unless params[:mag_type].present?
-    mag_types = params[:mag_type]
+    mag_types = params[:mag_type].split(',')
     features.where(mag_type: mag_types)
   end
 
