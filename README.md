@@ -43,6 +43,16 @@ Ejecutar manualmente la task para traer los datos de la api de terremotos y guar
   rails runner "FetchAndSaveDataJob.new.perform"
 ```
 
+Para poder visualizar la vista en react
+
+```
+cd client
+npm install
+npm run dev
+```
+
+
+
 Iniciar el servidor local
 
 ```bash
@@ -87,7 +97,7 @@ Iniciar el servidor local
 #### Obtener los registros de comentarios hechos a los registros de terremotos
 
 ```http
-  GET api/v1/features/${1}/comments
+  GET api/v1/features/${earthquake_id}/comments
 
 ```
 
@@ -99,7 +109,7 @@ Iniciar el servidor local
 #### Insertar un comentario a un registro existente
 
 ```http
-  POST api/v1/features/6/comments
+  POST api/v1/features/${earthquake_id}/comments
 
 ```
 
@@ -107,11 +117,10 @@ Se debera enviar un json con el siguiente formato
 
  ```
 {
-  "earthquake_id": 2,
   "comment": {
-    "body": "Este es un comentario para el feature 2"
+    "body": "Este es un 1 comentario para el feature 2"
   }
-} 
+}
  ```
 
 | Parameter | Type     | Description                       |
