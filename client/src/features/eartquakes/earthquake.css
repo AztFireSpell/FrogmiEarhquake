@@ -67,3 +67,22 @@
     font-size: 20px;
     margin: 10px;
 }
+
+.perpage-controls{
+    font-size: 25px;
+}
+.perpage-controls input{
+    font-size: 20px;
+    width: 50px;
+    border-style: dashed;
+}
+
+.filter-control{
+    position: relative;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;    
+    grid-template-columns: repeat(3,1fr);    
+}

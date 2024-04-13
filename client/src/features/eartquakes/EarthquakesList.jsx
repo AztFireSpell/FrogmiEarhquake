@@ -6,16 +6,28 @@ import "./earthquake.css";
 function EarhtquakesList() {
   const [earthquakes, setEarthquakes] = useState([]);
   const [pagination, setPagination] = useState(null);
+  const [totalRows, setTotalRows] = useState(0)
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [perPage, setPerPage] = useState(10);
 
   useEffect(() => {
     async function loadEarthquakes() {
       try {
-        const response = await fetch(`${API_URL}?page=${currentPage}`);
+
+        let url = `${API_URL}?per_page=${perPage}&page=${currentPage}`;
+
+        if (selectedFilters.length > 0) {
+          const filtersParam = selectedFilters.join(",");
+          url += `&mag_type=${filtersParam}`;
+        }
+
+        const response = await fetch(url);
         if (response.ok) {
           const json = await response.json();
           setEarthquakes(json);
           setPagination(json.pagination);
+          setTotalRows(json.pagination.total)
         } else {
           throw response;
         }
@@ -24,11 +36,23 @@ function EarhtquakesList() {
       }
     }
     loadEarthquakes();
-  }, [currentPage]);
+  }, [currentPage, selectedFilters, perPage]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  const handleFilterChange = (filter) => {
+    if (selectedFilters.includes(filter)) {
+      setSelectedFilters(selectedFilters.filter((f) => f !== filter));
+    } else {
+      setSelectedFilters([...selectedFilters, filter]);
+    }
+  };
+
+  const handlePerPageChange = (e) => {
+    setPerPage(e.target.value);
+  }
 
   const renderPageButtons = () => {
     const totalPages = pagination.total;
@@ -71,6 +95,74 @@ function EarhtquakesList() {
 
   return (
     <div>
+
+      <div className="perpage-controls">
+        <label htmlFor="perPageInput">Valores por página: </label>
+        <input
+          id="perPageInput"
+          type="number"
+          min="1"
+          value={perPage}
+          onChange={handlePerPageChange}
+        />
+
+      </div>
+
+      <h2>Filtros seleccionados: {selectedFilters.join(", ")}</h2>
+      <div className="filter-control">
+
+        
+        <button
+          onClick={() => handleFilterChange("md")}
+          className={selectedFilters.includes("md") ? "selected" : ""}
+        >
+          MD
+        </button>
+        <button
+          onClick={() => handleFilterChange("ml")}
+          className={selectedFilters.includes("ml") ? "selected" : ""}
+        >
+          ML
+        </button>
+        <button
+          onClick={() => handleFilterChange("ms")}
+          className={selectedFilters.includes("ms") ? "selected" : ""}
+        >
+          MS
+        </button>
+        <button
+          onClick={() => handleFilterChange("mw")}
+          className={selectedFilters.includes("mw") ? "selected" : ""}
+        >
+          MW
+        </button>
+        <button
+          onClick={() => handleFilterChange("me")}
+          className={selectedFilters.includes("me") ? "selected" : ""}
+        >
+          ME
+        </button>
+        <button
+          onClick={() => handleFilterChange("mi")}
+          className={selectedFilters.includes("mi") ? "selected" : ""}
+        >
+          MI
+        </button>
+        <button
+          onClick={() => handleFilterChange("mb")}
+          className={selectedFilters.includes("mb") ? "selected" : ""}
+        >
+          MB
+        </button>
+        <button
+          onClick={() => handleFilterChange("mlg")}
+          className={selectedFilters.includes("mlg") ? "selected" : ""}
+        >
+          MLG
+        </button>
+      </div>
+
+
       <div className="pagination">
         {pagination && (
           <div>
@@ -91,6 +183,7 @@ function EarhtquakesList() {
         )}
       </div>
 
+      <h2>Total de registros: {totalRows}</h2>
       <div className="data-earthquakes">
         {earthquakes.data &&
           earthquakes.data.map((earthquake) => (
