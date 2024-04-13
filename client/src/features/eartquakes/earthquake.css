@@ -4,42 +4,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: rgba(242, 242, 242, 255); */
     flex-wrap: wrap;
     padding: 30px;    
-    grid-template-columns: repeat(3,1fr);
-
-    
+    grid-template-columns: repeat(3,1fr);    
 }
 
 .earthquake-element{
     position: relative;
     max-width: 300px;
-    height: 215px;
-    /* background: #fff; */
+    height: 330px;
     margin: 30px 10px;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
     box-shadow: 4.5px 4.5px 5px rgba(0,0,0,0.5);
     transition: 0.3s ease-in-out;
-    /* text-align: center;
-    transition: .3s ease-in-out;
-    border: 10px;
-    border-style:inset;
-    border-color: rgba(255,255,255,0.25); */
-
 }
 
 .earthquake-element:hover{
-    /* box-shadow: rgba(17, 12, 46, 0.15);
-    transform: scale(1.1); */
-    height: 480px;
+    height: 600px;
+}
+
+.earthquake-comments{
+    margin-top: 20px;
 }
 
 .eartquake-content1{
     z-index: 1;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 .eartquake-content2{
@@ -65,9 +57,13 @@
 .earthquake-magnitude{
     position: relative;
     margin-top: 10px;
-    padding: 5px 15px;
+    padding: 5px 10px;
     text-align: center;
     transition: 0.3s ease-in-out;
-    font-size: 20px;
+    font-size: 15px;
 }
 
+.earthquake-magtype{
+    font-size: 20px;
+    margin: 10px;
+}

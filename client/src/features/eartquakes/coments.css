@@ -1,0 +1,43 @@
+.no-comments{
+    font-size: 20px;
+}
+
+.comments-container{
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.comments-body{
+    text-align: center;
+    margin-top: 20px;
+    transition: .3s ease-in-out;
+    border: 10px;
+    border-style:inset;
+    border-color: rgba(255,255,255,0.25);
+}
+
+.form-create-comment{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    transition: .3s ease-in-out;
+    border: 10px;
+    border-style:inset;
+    border-color: rgba(255,255,255,0.25);
+}
+
+.header-form{
+    margin: 20px;
+
+}
+
+.submitButtonForm{
+    margin: 10px;
+}
+
+.textinputcreate{
+    font-size: 25px;
+    width: 400px;
+    height: 100px;
+}
