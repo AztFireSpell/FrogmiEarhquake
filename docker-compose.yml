@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  rails:
+    build: ./path/to/your/rails/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  db:
+    image: mysqlite:latest
+
+  data-job:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./path/to/your/rails/app:/app
+    environment:
+      - RAILS_ENV=production
+    command: ["bundle", "exec", "rails", "runner", "FetchAndSaveDataJob.new.perform"]
+    
+  react:
+    build: ./client
+    ports:
+      - "8080:80"
+    environment:
+      - VITE_API_URL=http://rails:3000/api/v1/features/
