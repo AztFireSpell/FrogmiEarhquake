@@ -5,32 +5,28 @@ ARG RUBY_VERSION=3.2.3
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
-WORKDIR /app
+WORKDIR /rails
 
-#Instalar las gemas
-COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
-
-# Copy application code
-COPY . .
+# Set production environment
+ENV RAILS_ENV="development" \
+    BUNDLE_WITHOUT=""
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libvips pkg-config
 
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+#Instalar las gemas
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+# Copy application code
+COPY . .
+
+ENTRYPOINT ["./bin/docker-entrypoint"]
+
+RUN bundle exec bootsnap precompile app/ lib/
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 
-#CMD ["./bin/rails", "server"]
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
