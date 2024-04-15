@@ -10,9 +10,15 @@ class Api::V1::CommentsController < ApplicationController
 
   def create
 
-    earthquake = Earthquake.find_by(id: params[:feature_id])
+    if params[:earthquake_id].present?
+      earthquake_id = params[:earthquake_id]
+    else 
+      earthquake_id = params[:feature_id]
+    end
+
+    earthquake = Earthquake.find_by(id: earthquake_id)
     unless earthquake
-      render json: { error: 'Feature not found' }, status: :not_found
+      render json: { error: 'El id de terremoto no existe' }, status: :not_found
       return
     end
 

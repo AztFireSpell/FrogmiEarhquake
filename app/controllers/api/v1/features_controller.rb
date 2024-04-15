@@ -1,6 +1,13 @@
 class Api::V1::FeaturesController < ApplicationController
   def index
     features = Earthquake.all
+
+    per_page = params[:per_page].to_i
+    if per_page >= 1000
+      render json: {error: "El parametro per_page debe ser menor a 1000"}
+      return
+    end
+
     features = filter_by_mag_type(features)
     features = paginate(features)
 
