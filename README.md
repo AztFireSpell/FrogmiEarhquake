@@ -8,7 +8,6 @@ Tecnologías usadas:
 Framework de desarrollo:![RoR](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 
 Lenguajes de programación utilizados: ![Ruby](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
-
 ![SQLITE](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
 ## Ejecutar localmente
@@ -156,3 +155,9 @@ Si no se incluye el earthquake_id se utilizara el id incluido en la URL
   }
 }
  ```
+
+## Documentación en POSTMAN
+
+Se puede consultar la documentación tambien de referencia en este documento de POSTMAN
+
+https://documenter.getpostman.com/view/22626094/2sA3Bj8EBc
