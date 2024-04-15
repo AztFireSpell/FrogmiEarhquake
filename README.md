@@ -34,8 +34,9 @@ Instalar las gemas requeridas
 Crear la base de datos local mysqlite con las migraciones
 
 ```bash
+rails db:migrate
 rake db:create
-rake db:migrate
+rake db:prepare
 ```
 
 Ejecutar manualmente la task para traer los datos de la api de terremotos y guardar localmente en mysqlite
@@ -51,13 +52,26 @@ npm install
 npm run dev
 ```
 
-
-
 Iniciar el servidor local
 
 ```bash
   rails server
 ```
+
+## Ejecutar con docker
+
+Clonar el proyecto
+
+```bash
+  git clone https://github.com/AztFireSpell/FrogmiEarhquake.git
+```
+
+Ejecutar para iniciar las imagenes con docker
+
+```bash
+docker-compose up
+```
+
 
 ## Documentación para API
 
@@ -113,7 +127,27 @@ Iniciar el servidor local
 
 ```
 
-Se debera enviar un json con el siguiente formato
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `earthquake_id`      | `int` | Numero de registro de terremoto a insertar comentario |
+| `body`      | `int` | ** Requerido ** Comentario a insertar el comentario |
+
+
+Se debera enviar un json con payload con algunos de los siguientes formatos:
+
+Si se utiliza este json, se utilizara el earthquake_id del payload para buscar e ingresar el terremoto
+
+```
+{
+  "earthquake_id" : 1,
+  "comment": {
+    "body": "Este es un 1 comentario para el feature 2"
+  }
+}
+ ```
+
+Si no se incluye el earthquake_id se utilizara el id incluido en la URL 
 
  ```
 {
@@ -122,7 +156,3 @@ Se debera enviar un json con el siguiente formato
   }
 }
  ```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `earthquake_id`      | `int` | Numero de registro de terremoto a insertar comentario |

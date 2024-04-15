@@ -1,28 +1,12 @@
-version: '3.8'
-
 services:
   rails:
     build: ./
     container_name: backend-frogmi
     ports:
-      - "3000:3000"
-    depends_on:
-      - db
-  db:
-    image: mysqlite:latest
-
-  data-job:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./:/app
-    environment:
-      - RAILS_ENV=production
-    command: ["bundle", "exec", "rails", "runner", "FetchAndSaveDataJob.new.perform"]
-    
+      - "3000:3000"    
   react:
     build: ./client
+    container_name: frontend-frogmi
     ports:
       - "8080:80"
     environment:
